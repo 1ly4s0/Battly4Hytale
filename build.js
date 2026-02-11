@@ -27,6 +27,7 @@ builder.build({
                 arch: ["x64", "arm64"]
             }]
         },
+
         linux: {
             icon: "src/assets/images/logo/256x256.png",
             target: [
