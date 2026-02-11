@@ -1,0 +1,205 @@
+﻿*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  user-select: none;
+  background: transparent;
+  color: #ffffff;
+  font-family: "Rajdhani", "Manrope", "Segoe UI", sans-serif;
+}
+
+.splash-window {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  -webkit-app-region: drag;
+  isolation: isolate;
+}
+
+.splash-background {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.splash-bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.95;
+  filter: saturate(1.04) contrast(1.02);
+}
+
+.splash-bg-vignette,
+.splash-bg-frost,
+.splash-bg-noise {
+  position: absolute;
+  inset: 0;
+}
+
+.splash-bg-vignette {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.86),
+      rgba(0, 0, 0, 0.34) 52%,
+      rgba(0, 0, 0, 0.06)
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.92),
+      rgba(0, 0, 0, 0.1) 54%,
+      rgba(0, 0, 0, 0.44)
+    );
+}
+
+.splash-bg-frost {
+  background: radial-gradient(
+    circle at 18% 32%,
+    rgba(80, 122, 174, 0.24),
+    rgba(80, 122, 174, 0) 46%
+  );
+}
+
+.splash-bg-noise {
+  opacity: 0.045;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.24) 0.45px,
+    rgba(255, 255, 255, 0) 0.45px
+  );
+  background-size: 3px 3px;
+}
+
+.splash-header {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 10px 14px 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.splash-kicker {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: rgba(236, 247, 255, 0.7);
+  text-transform: uppercase;
+}
+
+.splash-content {
+  display: grid;
+  place-content: center;
+  gap: 6px;
+  justify-items: center;
+  padding: 10px 22px;
+  text-align: center;
+}
+
+.splash-logo {
+  width: 86px;
+  height: 86px;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
+  animation: splash-float 3s ease-in-out infinite;
+}
+
+.splash-title {
+  margin: 0;
+  font-family: "Bebas Neue", "Rajdhani", sans-serif;
+  font-size: 54px;
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  color: #f4f9ff;
+  text-shadow: 0 16px 26px rgba(0, 0, 0, 0.5);
+}
+
+.splash-subtitle {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(217, 233, 247, 0.82);
+  text-transform: uppercase;
+}
+
+.splash-footer {
+  padding: 10px 16px 14px;
+  display: grid;
+  gap: 9px;
+}
+
+.splash-loader-track {
+  height: 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(176, 212, 237, 0.26);
+  background: rgba(6, 22, 38, 0.8);
+  overflow: hidden;
+}
+
+.splash-loader-bar {
+  height: 100%;
+  width: 42%;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(233, 243, 252, 0.9),
+    rgba(165, 203, 236, 0.95),
+    rgba(240, 248, 255, 0.95)
+  );
+  box-shadow: 0 0 24px rgba(198, 226, 250, 0.45);
+  animation: splash-progress 1.5s ease-in-out infinite;
+}
+
+.splash-status {
+  margin: 0;
+  min-height: 18px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(208, 229, 246, 0.9);
+  transition: opacity 0.2s ease;
+}
+
+@keyframes splash-progress {
+  0% {
+    transform: translateX(-108%);
+  }
+
+  50% {
+    transform: translateX(82%);
+  }
+
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+@keyframes splash-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+

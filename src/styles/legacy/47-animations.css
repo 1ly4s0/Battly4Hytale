@@ -1,0 +1,39 @@
+﻿@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in {
+  animation: fadeIn var(--transition-normal);
+}
+.slide-up {
+  animation: slideUp var(--transition-normal);
+}
+.slide-down {
+  animation: slideDown var(--transition-normal);
+}
+
+

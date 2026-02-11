@@ -1,0 +1,107 @@
+﻿.version-section {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  position: relative;
+  min-width: 260px;
+  justify-self: center;
+}
+.version-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+.version-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.version-info-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.version-info-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--primary);
+  background: var(--glass-bg-hover);
+}
+.version-select {
+  height: 46px;
+  padding: 0 var(--spacing-md);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-fast);
+}
+.version-select:hover {
+  border-color: var(--primary);
+  background: var(--glass-bg-hover);
+}
+.version-select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+.version-info {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  max-height: 2.2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: none;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.version-tooltip {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  max-width: 320px;
+  background: rgba(15, 15, 22, 0.96);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-sm) var(--spacing-md);
+  box-shadow: var(--glass-shadow);
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: all var(--transition-fast);
+  white-space: pre-line;
+  z-index: 2000;
+}
+.version-section:hover .version-tooltip,
+.version-section:focus-within .version-tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+

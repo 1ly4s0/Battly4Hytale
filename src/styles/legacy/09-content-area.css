@@ -1,0 +1,25 @@
+﻿.content-area {
+  position: fixed;
+  top: var(--titlebar-height);
+  left: 0;
+  right: 0;
+  bottom: var(--bottombar-height);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-lg);
+}
+.content-area::-webkit-scrollbar {
+  width: 8px;
+}
+.content-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+.content-area::-webkit-scrollbar-thumb {
+  background: var(--glass-bg);
+  border-radius: var(--radius-full);
+}
+.content-area::-webkit-scrollbar-thumb:hover {
+  background: var(--glass-bg-hover);
+}
+
+

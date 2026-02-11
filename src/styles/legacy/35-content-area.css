@@ -1,0 +1,49 @@
+﻿.content-area {
+  position: fixed;
+  top: var(--titlebar-height);
+  left: 0;
+  right: 0;
+  bottom: var(--bottombar-height);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.view {
+  display: none;
+  flex: 1;
+  min-height: 0;
+  padding: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  overflow-y: auto;
+  overflow-x: hidden;
+  animation: fadeIn var(--transition-normal);
+}
+.view.active {
+  display: block;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.view::-webkit-scrollbar {
+  width: 8px;
+}
+.view::-webkit-scrollbar-track {
+  background: transparent;
+}
+.view::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+.view::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+

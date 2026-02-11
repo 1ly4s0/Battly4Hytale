@@ -1,0 +1,23 @@
+﻿@media (max-width: 768px) {
+  .game-logo {
+    font-size: 3rem;
+  }
+  .language-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .settings-container {
+    flex-direction: column;
+    height: auto;
+  }
+  .settings-sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .news-carousel,
+  .mods-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+

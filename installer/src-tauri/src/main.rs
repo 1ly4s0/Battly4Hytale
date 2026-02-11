@@ -8,20 +8,19 @@ use std::path::{Path, PathBuf};
 use std::io::{Cursor, Read};
 use std::process::Command;
 use std::env;
-use std::thread;
-use tauri::{Manager, Window};
+use tauri::Window;
 use tauri_plugin_aptabase::{EventTracker, InitOptions};
 use winreg::RegKey;
 use winreg::enums::*;
 use zip::ZipArchive;
 
 const APP_FOLDER_NAME: &str = "BattlyLauncher4Hytale";
-const APP_DISPLAY_NAME: &str = "Battly Launcher";
+const APP_DISPLAY_NAME: &str = "Battly Launcher 4 Hytale";
 const EXECUTABLE_NAME: &str = "Battly Launcher 4 Hytale.exe";
 const UNINSTALLER_NAME: &str = "uninstall.exe";
 const PAYLOAD_URL: &str = "https://github.com/1ly4s0/Battly4Hytale/releases/latest/download/BattlyLauncher-win.zip"; 
-const SHORTCUT_NAME: &str = "Battly Launcher";
-const OPERA_SETUP_URL: &str = "https://net.geo.opera.com/opera/stable/windows?utm_source=battly&utm_medium=installer&utm_campaign=battly_installer";
+const SHORTCUT_NAME: &str = "Battly Launcher 4 Hytale";
+const OPERA_SETUP_URL: &str = "https://net.geo.opera.com/opera_gx/stable/edition/std-1?utm_source=battly&utm_medium=pb&utm_campaign=gx";
 
 #[derive(Clone, serde::Serialize)]
 struct Payload {
@@ -30,11 +29,25 @@ struct Payload {
     status_data: Option<String>,
 }
 
+fn launcher_install_path() -> Option<PathBuf> {
+    dirs::data_local_dir().map(|p| p.join(APP_FOLDER_NAME))
+}
+
+fn launcher_is_installed() -> bool {
+    if let Some(install_dir) = launcher_install_path() {
+        return install_dir.join(EXECUTABLE_NAME).exists();
+    }
+    false
+}
+
 #[tauri::command]
 async fn start_install(window: Window, install_opera: bool) -> Result<(), String> {
+    let is_update = launcher_is_installed();
+    let should_install_opera = if is_update { false } else { install_opera };
+
     window.track_event("install_started", None);
 
-    if install_opera {
+    if should_install_opera {
         window.track_event("opera_accepted", None);
     }
 
@@ -55,22 +68,24 @@ async fn start_install(window: Window, install_opera: bool) -> Result<(), String
     window.emit("install-progress", Payload { progress: 0.2, status_key: "status_downloading_start".into(), status_data: None }).unwrap();
     
     // We use a thread for blocking download/extract to not freeze the async runtime too much 
-    // (though blocking reqwest inside async fn is bad practice, for this simple installer it's okay-ish, 
-    // but better spawn_blocking)
-    
     let install_dir_clone = install_dir.clone();
     let window_clone = window.clone();
     
-    // Create a background thread for heavy lifting
-    std::thread::spawn(move || {
-        if let Err(_e) = run_install_logic(install_dir_clone, window_clone, install_opera) {
-             // Emit error
-             // We can't easily emit from here if window is not thread safe? 
-             // Tauri windows are thread safe to clone and emit.
-        }
+    // Create a background thread for heavy lifting and wait for it to complete
+    let handle = std::thread::spawn(move || {
+        run_install_logic(install_dir_clone, window_clone, should_install_opera)
     });
 
-    Ok(())
+    // Wait for the thread to complete and handle any errors
+    match handle.join() {
+        Ok(result) => result,
+        Err(_) => Err("Installation thread panicked".to_string()),
+    }
+}
+
+#[tauri::command]
+fn is_launcher_installed() -> bool {
+    launcher_is_installed()
 }
 
 fn run_install_logic(install_dir: PathBuf, window: Window, install_opera: bool) -> Result<(), String> {
@@ -198,7 +213,7 @@ fn register_uninstaller(install_dir: &Path, uninstaller_path: &Path) -> Result<(
     let (key, _) = hkcu.create_subkey(&path)?;
 
     key.set_value("DisplayName", &APP_DISPLAY_NAME)?;
-    key.set_value("Publisher", &"TecnoBros")?;
+    key.set_value("Publisher", &"TECNO BROS")?;
     let uninstall_cmd = format!("\"{}\" --uninstall", uninstaller_path.to_string_lossy());
     key.set_value("UninstallString", &uninstall_cmd)?;
     key.set_value("InstallLocation", &install_dir.to_string_lossy().to_string())?;
@@ -236,7 +251,7 @@ fn main() {
         .plugin(tauri_plugin_aptabase::Builder::new("A-SH-8633750963").with_options(InitOptions {
             host: Some("https://analytics-hytale.battlylauncher.com".to_string()),
         }).build())
-        .invoke_handler(tauri::generate_handler![start_install, launch_app, close_installer])
+        .invoke_handler(tauri::generate_handler![start_install, is_launcher_installed, launch_app, close_installer])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

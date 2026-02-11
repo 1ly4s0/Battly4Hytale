@@ -1,0 +1,32 @@
+﻿.view-header {
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--glass-border);
+}
+.view-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+.view-title h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin: 0;
+}
+.view-title i {
+  color: var(--primary);
+  font-size: var(--font-size-xl);
+}
+.badge.beta {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: rgba(249, 115, 22, 0.2);
+  color: #f97316;
+  border: 1px solid #f97316;
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.5px;
+}
+
+

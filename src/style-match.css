@@ -1,0 +1,33 @@
+﻿@import url("styles/match/shell.css");
+@import url("styles/match/panels.css");
+
+:root {
+  --primary: #8cb9dc;
+  --primary-hover: #77a7cb;
+  --primary-light: rgba(140, 185, 220, 0.16);
+  --secondary: #5f9fcd;
+  --accent: #d4e8f8;
+}
+
+
+.primary-btn {
+  box-shadow: 0 4px 12px rgba(95, 159, 205, 0.3);
+}
+
+.primary-btn:hover {
+  box-shadow: 0 6px 16px rgba(95, 159, 205, 0.45);
+}
+
+.gpu-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-color: var(--primary);
+}
+
+.onboarding-btn {
+  box-shadow: 0 4px 15px rgba(95, 159, 205, 0.3);
+}
+
+.onboarding-btn:hover:not(:disabled) {
+  box-shadow: 0 8px 25px rgba(95, 159, 205, 0.45);
+}
+

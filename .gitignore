@@ -13,3 +13,4 @@ src/**/*.log
 installer/Cargo.lock
 *.lock
 /installer/src-tauri/target
+/cdn-root

@@ -1,0 +1,68 @@
+﻿.settings-tabs {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-xs);
+  background: var(--glass-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  max-width: 300px;
+}
+.settings-tab {
+  flex: 1;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  justify-content: center;
+}
+.settings-tab:hover {
+  color: var(--text-primary);
+  background: var(--glass-bg-hover);
+}
+.settings-tab.active {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+.settings-page {
+  display: none;
+}
+.settings-page.active {
+  display: block;
+  animation: fadeInUp 0.3s ease-out;
+}
+.settings-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-md);
+  transition: all var(--transition-fast);
+}
+.settings-option:hover {
+  border-color: var(--primary);
+  background: var(--glass-bg-hover);
+}
+.setting-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.settings-desc {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin-top: var(--spacing-xs);
+}
+
+

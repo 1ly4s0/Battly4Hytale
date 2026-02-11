@@ -1,0 +1,46 @@
+﻿.modern-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+  flex-shrink: 0;
+}
+.modern-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.switch-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: var(--bg-primary);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-normal);
+}
+.switch-slider::before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background: var(--text-secondary);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-normal);
+}
+.modern-switch input:checked + .switch-slider {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-color: var(--primary);
+}
+.modern-switch input:checked + .switch-slider::before {
+  transform: translateX(22px);
+  background: white;
+}
+.modern-switch input:disabled + .switch-slider {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+

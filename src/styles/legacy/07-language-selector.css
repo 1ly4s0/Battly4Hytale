@@ -1,0 +1,32 @@
+﻿.language-selector {
+  position: relative;
+}
+.lang-dropdown {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+.lang-dropdown:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--primary);
+}
+.lang-dropdown:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+select {
+  color-scheme: dark;
+}
+select option {
+  background: #0f1118;
+  color: var(--text-primary);
+}
+
+

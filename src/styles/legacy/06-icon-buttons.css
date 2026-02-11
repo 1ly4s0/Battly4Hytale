@@ -1,0 +1,27 @@
+﻿.icon-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: 1rem;
+}
+.icon-btn:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+.discord-btn:hover {
+  background: #5865f2;
+  border-color: #5865f2;
+  color: white;
+}
+
+

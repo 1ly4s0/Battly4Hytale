@@ -1,0 +1,167 @@
+﻿.title-bar {
+  height: 48px;
+  background: rgba(17, 17, 24, 0.8);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-md);
+  position: relative;
+  z-index: 100;
+  -webkit-app-region: drag;
+}
+.title-drag-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.app-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+.logo-cube {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+  animation: logoFloat 3s ease-in-out infinite;
+}
+.logo-cube i {
+  color: white;
+  font-size: 0.875rem;
+}
+@keyframes logoFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+.app-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  background: linear-gradient(
+    90deg,
+    var(--text-primary),
+    var(--text-secondary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.title-bar-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  -webkit-app-region: no-drag;
+}
+.divider {
+  width: 1px;
+  height: 20px;
+  background: var(--glass-border);
+  margin: 0 var(--spacing-sm);
+}
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+.icon-btn:hover {
+  background: var(--glass-bg);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+.icon-btn:active {
+  transform: translateY(0);
+}
+.icon-btn.discord-btn {
+  color: #5865f2;
+}
+.icon-btn.discord-btn:hover {
+  color: #ffffff;
+  background: rgba(88, 101, 242, 0.15);
+  box-shadow: 0 0 20px rgba(88, 101, 242, 0.3);
+}
+.language-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 0 var(--spacing-sm);
+  height: 32px;
+  transition: all var(--transition-normal);
+}
+.language-selector:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--primary);
+}
+.language-selector i {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+.lang-dropdown {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  padding-right: var(--spacing-sm);
+}
+.lang-dropdown option {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+.window-controls {
+  display: flex;
+  height: 100%;
+  -webkit-app-region: no-drag;
+}
+.control-btn {
+  width: 46px;
+  height: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  font-size: 0.75rem;
+}
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+.control-btn.close:hover {
+  background: #ef4444;
+  color: white;
+}
+
+

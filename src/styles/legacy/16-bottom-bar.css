@@ -1,0 +1,60 @@
+﻿.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--bottombar-height);
+  background: rgba(10, 10, 15, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--glass-border);
+  display: grid !important;
+  grid-template-columns: minmax(220px, 300px) minmax(260px, 360px) auto;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-xl);
+  z-index: 1000;
+  column-gap: var(--spacing-lg);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+  overflow: visible;
+}
+.user-section {
+  width: 100%;
+  max-width: 300px;
+  justify-self: start;
+}
+.input-container {
+  position: relative;
+}
+.input-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1.125rem;
+  pointer-events: none;
+}
+#username {
+  width: 100%;
+  height: 46px;
+  padding: 0 var(--spacing-md) 0 48px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+#username::placeholder {
+  color: var(--text-muted);
+}
+#username:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+

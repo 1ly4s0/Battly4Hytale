@@ -1,4 +1,4 @@
-const axios = require('axios');
+﻿const axios = require('axios');
 const { _trackEvent } = require('../analytics');
 
 const GITHUB_USER = "1ly4s0";
@@ -10,15 +10,16 @@ let globalRemoteConfig = null;
 
 async function checkForUpdates(win) {
     try {
-        console.log("Checking for updates from:", UPDATE_CONFIG_URL);
+        logger.info("Checking for updates from:", UPDATE_CONFIG_URL);
         const response = await axios.get(UPDATE_CONFIG_URL);
         globalRemoteConfig = response.data;
         const currentVersion = require('../../package.json').version;
+        const { logger } = require('../utils/logger');
 
         const launcherConfig = globalRemoteConfig.launcher || globalRemoteConfig;
         const remoteVersion = launcherConfig.version;
 
-        console.log(`Current: ${currentVersion}, Remote: ${remoteVersion}`);
+        logger.info(`Current: ${currentVersion}, Remote: ${remoteVersion}`);
 
         if (compareVersions(remoteVersion, currentVersion) > 0) {
             _trackEvent('update_available', {
@@ -29,7 +30,7 @@ async function checkForUpdates(win) {
         }
     } catch (e) {
         _trackEvent('update_check_failed', { error: e.message });
-        console.error('Failed to check for updates:', e.message);
+        logger.error('Failed to check for updates:', e.message);
     }
 }
 

@@ -1,4 +1,5 @@
-const DiscordRPC = require('discord-rpc');
+﻿const DiscordRPC = require('discord-rpc');
+const { logger } = require('../utils/logger');
 
 const CLIENT_ID = '917866962523152404';
 DiscordRPC.register(CLIENT_ID);
@@ -10,7 +11,7 @@ function initDiscord() {
     rpc = new DiscordRPC.Client({ transport: 'ipc' });
 
     rpc.on('ready', () => {
-        console.log('Discord RPC connected');
+        logger.info('Discord RPC connected');
         setActivity('En el Launcher');
     });
 
@@ -28,7 +29,7 @@ function setActivity(details, state = null, smallImageKey = null, smallImageText
         instance: false,
     };
 
-    
+
     if (state && typeof state === 'string') {
         activity.state = state;
     }

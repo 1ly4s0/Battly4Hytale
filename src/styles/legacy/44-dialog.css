@@ -1,0 +1,35 @@
+﻿.dialog-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--spacing-lg);
+  background: rgba(139, 92, 246, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dialog-icon i {
+  font-size: 2rem;
+  color: var(--primary);
+}
+.small-modal h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+.small-modal p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+  line-height: 1.6;
+}
+.dialog-actions {
+  display: flex;
+  gap: var(--spacing-md);
+}
+.dialog-actions button {
+  flex: 1;
+}
+
+

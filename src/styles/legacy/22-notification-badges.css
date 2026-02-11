@@ -1,0 +1,25 @@
+﻿.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--primary);
+  color: white;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-full);
+  line-height: 1;
+}
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--error);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--bg-primary);
+  position: absolute;
+  top: 0;
+  right: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+

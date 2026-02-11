@@ -1,7 +1,8 @@
-const fs = require('fs-extra');
+﻿const fs = require('fs-extra');
 const path = require('path');
 const { app } = require('electron');
 const { _trackEvent } = require('../analytics');
+const { logger } = require('../utils/logger');
 
 const configPath = path.join(app.getPath('appData'), 'Battly4Hytale', 'user-settings.json');
 
@@ -24,7 +25,7 @@ async function loadSettings() {
             await saveSettings();
         }
     } catch (e) {
-        console.error("Error loading settings:", e);
+        logger.error("Error loading settings:", e);
     }
     return currentSettings;
 }
@@ -38,7 +39,7 @@ async function saveSettings(settings) {
         await fs.ensureDir(path.dirname(configPath));
         await fs.writeJson(configPath, currentSettings);
     } catch (e) {
-        console.error("Error saving settings:", e);
+        logger.error("Error saving settings:", e);
     }
 }
 

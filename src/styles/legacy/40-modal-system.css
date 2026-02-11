@@ -1,0 +1,109 @@
+﻿.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn var(--transition-normal);
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+}
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: fadeIn var(--transition-normal);
+}
+.modal-content {
+  position: relative;
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: modalSlideUp var(--transition-slow);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+}
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.glass-panel {
+  background: rgba(17, 17, 24, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+.modal-content.small-modal {
+  width: 100%;
+  max-width: 420px;
+  padding: var(--spacing-xl);
+}
+.modal-content.large-modal {
+  width: 100%;
+  max-width: 800px;
+}
+.modal-content.settings-modal {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  max-height: 85vh;
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-bottom: 1px solid var(--glass-border);
+}
+.modal-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+.modal-header i {
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+.modal-close-btn {
+  width: 36px;
+  height: 36px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+}
+.modal-close-btn:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+

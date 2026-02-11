@@ -1,0 +1,60 @@
+﻿@media (max-width: 768px) {
+  .lang-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .news-grid,
+  .mods-grid {
+    grid-template-columns: 1fr;
+  }
+  .bottom-bar {
+    grid-template-columns: 1fr;
+    height: auto;
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
+  }
+  .user-section,
+  .center-status,
+  .version-section,
+  .action-buttons {
+    max-width: 100%;
+    width: 100%;
+  }
+  .user-section,
+  .version-section,
+  .action-buttons {
+    justify-self: stretch;
+  }
+  .center-status {
+    position: static;
+    transform: none;
+    order: 4;
+    pointer-events: none;
+  }
+  #status {
+    width: 100%;
+    white-space: normal;
+  }
+  .version-section {
+    min-width: 0;
+  }
+  .action-buttons {
+    width: 100%;
+  }
+  .action-buttons .bar-btn {
+    flex: 1;
+    min-width: 0;
+  }
+  .version-tooltip {
+    right: auto;
+    left: 0;
+    max-width: 100%;
+  }
+  .version-info {
+    display: -webkit-box;
+  }
+  .modal-content {
+    padding: var(--spacing-lg);
+  }
+}
+
+

@@ -1,0 +1,63 @@
+﻿.hero-section {
+  flex-shrink: 0;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: var(--spacing-xl) 0;
+}
+.hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.game-logo {
+  font-size: 6rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  gap: 0.1em;
+  justify-content: center;
+}
+.game-logo span {
+  display: inline-block;
+  background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: letterFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 4px 20px rgba(139, 92, 246, 0.3));
+}
+.game-logo .logo-y {
+  animation-delay: 0.1s;
+}
+.game-logo .logo-t {
+  animation-delay: 0.2s;
+}
+.game-logo .logo-a {
+  animation-delay: 0.3s;
+}
+.game-logo .logo-l {
+  animation-delay: 0.4s;
+}
+.game-logo .logo-e {
+  animation-delay: 0.5s;
+}
+@keyframes letterFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.support-msg {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+

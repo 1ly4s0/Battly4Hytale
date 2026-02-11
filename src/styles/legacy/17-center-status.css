@@ -1,0 +1,171 @@
+﻿.center-status {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  width: min(92vw, 760px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+#status {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin: 0;
+  max-width: 100%;
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  background: rgba(10, 10, 15, 0.78);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+#status:not(:empty) {
+  opacity: 1;
+}
+.progress-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(-1 * var(--progress-height));
+  height: var(--progress-height);
+  background: linear-gradient(
+    90deg,
+    rgba(10, 10, 15, 0.9),
+    rgba(18, 18, 28, 0.95),
+    rgba(10, 10, 15, 0.9)
+  );
+  border-top: 1px solid var(--glass-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--spacing-xl);
+  z-index: 1100;
+  pointer-events: none;
+}
+.progress-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      120% 100% at 0% 50%,
+      rgba(139, 92, 246, 0.15) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      120% 100% at 100% 50%,
+      rgba(236, 72, 153, 0.12) 0%,
+      transparent 60%
+    ),
+    linear-gradient(
+      120deg,
+      rgba(6, 182, 212, 0.08),
+      transparent 45%,
+      rgba(139, 92, 246, 0.1) 70%,
+      transparent 100%
+    );
+  opacity: 0.75;
+  animation: progressBgFlow 8s ease-in-out infinite;
+  z-index: 0;
+}
+.progress-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--primary),
+    var(--secondary),
+    var(--accent)
+  );
+  background-size: 200% 100%;
+  animation: progressBarFlow 6s linear infinite;
+  border-radius: 0;
+  transition: width 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.45);
+  z-index: 1;
+}
+.progress-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+.progress-container.indeterminate .progress-bar {
+  width: 100%;
+  background-size: 200% 100%;
+  animation: progressIndeterminate 1.4s linear infinite;
+}
+@keyframes progressIndeterminate {
+  0% {
+    background-position: 0% 0;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+.progress-text {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@keyframes progressBgFlow {
+  0% {
+    transform: translateX(0);
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    transform: translateX(-8%);
+    filter: hue-rotate(8deg);
+  }
+  100% {
+    transform: translateX(0);
+    filter: hue-rotate(0deg);
+  }
+}
+@keyframes progressBarFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+body.progress-active #status {
+  opacity: 0;
+}
+
+

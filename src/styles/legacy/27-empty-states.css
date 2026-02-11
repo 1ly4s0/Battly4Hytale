@@ -1,0 +1,27 @@
+﻿.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-3xl);
+  text-align: center;
+}
+.empty-state i {
+  font-size: 64px;
+  color: var(--text-muted);
+  opacity: 0.5;
+  margin-bottom: var(--spacing-lg);
+}
+.empty-state h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+.empty-state p {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+

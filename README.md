@@ -1,34 +1,56 @@
 # Battly Launcher for Hytale
 
-Lanzador de código abierto para Hytale con soporte de mods, gestión de parches cliente/servidor y UX simplificada.
+Battly Launcher is an open source launcher for Hytale focused on patch-based updates, mod management, and a modern desktop UX.
 
-![Estado](https://img.shields.io/badge/Estado-Beta-blue) ![Plataforma](https://img.shields.io/badge/Plataforma-Windows-lightgrey)
-
----
-## Resumen
-Battly automatiza la descarga del cliente, aplica parches para conectarse a servidores comunitarios, instala mods y muestra noticias oficiales. Usa Electron: proceso **Main** para orquestación y proceso **Renderer** para la UI.
-
-### Características clave
-- Parcheo binario automático del cliente (dominios y parches `.pwr`) con fallback de mirrors.
-- Patcher para servidores (`HytaleServer.jar`) compatible con dominios personalizados.
-- Gestor de mods con búsqueda e instalación en un clic (CurseForge).
-- Noticias in-app desde el feed oficial.
-- Multilenguaje (ES/EN/FR, ampliable vía `src/locales/`).
-- Telemetría ligera con Aptabase (sin `systeminformation` pesado).
-
-### Stack
-- **Runtime**: Electron + Node.js 18+
-- **UI**: HTML/CSS/JS (renderer), i18n con JSON.
-- **Herramientas**: Butler (itch.io) para aplicar parches `.pwr`, AdmZip para JARs.
+![Version](https://img.shields.io/badge/version-1.1.0-blue)
+![Status](https://img.shields.io/badge/status-beta-3b82f6)
+![Platform](https://img.shields.io/badge/platform-Windows-lightgrey)
 
 ---
-## Requisitos
+
+## What Is Included
+
+- Patch pipeline with `.pwr` files (download, validate, apply, recover).
+- Version channels (`release` and `pre-release`) with API/CDN fallback support.
+- Custom client/server patching for community auth and server compatibility.
+- In-app mods browser and installer (CurseForge integration).
+- News feed with safe fallback behavior.
+- Full i18n runtime with locale JSON files.
+- Rotating launcher backgrounds with fade transitions.
+- In-app game logs viewer (tail 100/200/500, full log, realtime mode).
+
+---
+
+## Runtime Stack
+
+- Electron + Node.js 20+
+- Renderer: vanilla HTML/CSS/JS
+- IPC bridge: `src/preload.js`
+- Build flow: `build.js` + `electron-builder`
+
+Main external endpoints in current architecture:
+
+- API config and metadata: `https://api.battlylauncher.com/hytale/config`
+- Patch CDN: `https://cdn.battlylauncher.com/hytale/patches/...`
+- Auth session service: `https://sessions.battly.org`
+
+---
+
+## Requirements
+
 - Windows 10/11 x64
-- Node.js 18 o superior
-- Conexión a Internet (descarga inicial de assets/parches)
+- Node.js 20+
+- Internet connection for first setup and patch delivery
+
+Notes for Linux development/testing:
+
+- The launcher supports Linux workflows in services, but game binary compatibility depends on GLIBC and build target.
+- If a patch file is downloaded as 0 bytes, the launcher now treats it as invalid and retries/fallbacks.
 
 ---
-## Instalación (desarrollo)
+
+## Local Development
+
 ```bash
 git clone https://github.com/1ly4s0/Battly4Hytale.git
 cd Battly4Hytale
@@ -36,47 +58,141 @@ npm install
 npm start
 ```
 
-Scripts útiles:
-- `npm start` — modo desarrollo.
-- `npm run build` — genera instalador en `dist/`.
+Build package:
+
+```bash
+npm run build
+```
 
 ---
-## Estructura rápida
-```
+
+## Project Structure
+
+```text
 src/
-├─ main.js, renderer.js
-├─ index.html, style.css, splash.html
-├─ analytics.js
-├─ services/ (game, patcher, serverPatcher, mods, news, updater, config, utils)
-├─ locales/        # traducciones
-├─ assets/, images/
-docs/ARCHITECTURE.md
+|- main.js                    # Electron main process
+|- preload.js                 # Safe renderer bridge
+|- renderer.js                # Main UI state and interactions
+|- index.html                 # Main launcher window
+|- splash.html                # Splash screen window
+|- scripts/                   # UI helper modules (i18n, navigation, bg rotator)
+|- services/                  # Domain services (game, patcher, mods, news, logs, versions)
+|- styles/                    # CSS modules (match, legacy, splash)
+|- locales/                   # Translation files
+|- assets/                    # Images, icons, bundled ui libs
+|- utils/                     # Helpers (logger, sanitizer, integrity)
+
+docs/
+|- ARCHITECTURE.md
+|- STYLES.md
 ```
 
-Más detalle en [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+---
+
+## Version Channels and Patch Selection
+
+The launcher now works with explicit channels:
+
+- `release` (official/stable)
+- `pre-release` (beta)
+
+Selection flow:
+
+1. Renderer asks `versionManager` for available channels and versions.
+2. Main process reads API metadata.
+3. If metadata cannot be resolved, fallback mapping is used.
+4. Selected patch is validated before apply.
+5. Empty or invalid patch files are rejected and retried.
+
+This prevents stale fallback text such as "manifest unavailable" from blocking channel-based selection.
 
 ---
-## Uso básico
-1) Ejecuta `npm start`.  
-2) Introduce tu nombre de jugador y elige preferencia de GPU si aplica.  
-3) Pulsa **Play**: el launcher descargará parches, aplicará modificaciones y lanzará Hytale.  
-4) Para mods, abre la pestaña Mods, busca e instala.  
-5) El botón de reparación borra la instalación y fuerza reinstalación limpia.
+
+## Game Launch Flow
+
+Launch flow (high level):
+
+1. Resolve selected version/channel.
+2. Ensure Java runtime (`services/javaManager.js`).
+3. Ensure game files and apply `.pwr` patch if required (`services/patcher.js`).
+4. Patch client/server binaries (`patchClient` / `patchServer`).
+5. Build auth tokens and launch process (`services/game.js`).
+6. Stream stdout/stderr into `services/gameLogs.js`.
+
+If launch fails, the user can inspect logs directly from Settings.
 
 ---
-## Solución de problemas
-- **403 al descargar parches**: asegúrate de usar la versión más reciente; las peticiones llevan `User-Agent` de navegador para evitar bloqueos de CDN.  
-- **El juego no inicia**: usa la opción “Reparar juego” o borra `%AppData%/Hytale/install/release`.  
-- **GPU no detectada**: la detección usa `wmic`; si no está disponible, selecciona GPU manualmente o deja en automático.  
-- **Noticias vacías**: el feed puede cambiar formato; el launcher muestra mensaje de error pero el resto funciona.
+
+## Settings and Logs
+
+Settings include:
+
+- player/account management
+- language selection
+- GPU preference
+- hide launcher on play
+- java override
+- open game location
+- repair game
+- open game logs
+
+Game logs modal modes:
+
+- last 100 lines
+- last 200 lines
+- last 500 lines
+- full log (slow on large sessions)
+- realtime stream
 
 ---
-## Contribuir
-- Issues y PRs son bienvenidos.  
-- Sigue las convenciones de lint/estilo del proyecto.  
-- Para nuevas funciones, documenta en `docs/ARCHITECTURE.md` y añade claves i18n si corresponde.
+
+## Troubleshooting
+
+### Patch fails with 403 or empty `.pwr`
+
+- Check CDN availability and selected channel.
+- Confirm fallback map entries include your platform and target version.
+- Delete invalid cached patch (`0 bytes`) and retry.
+
+### "Game executable not found after patching"
+
+- Trigger Repair Game.
+- Verify game path inside `%AppData%/Hytale/instances/...`.
+- Confirm patch apply finished without interruption.
+
+### Linux GLIBC mismatch
+
+Typical error pattern: `GLIBC_2.xx not found`.
+
+- Run on a newer distro/runtime with compatible GLIBC.
+- Ensure target binary matches your runtime expectations.
+
+### News openExternal error
+
+If you see `Cannot read properties of undefined (reading 'openExternal')`, verify preload API exposure and renderer usage for external links.
 
 ---
-## Licencia
-ISC.  
-Hytale es una marca registrada de Hypixel Studios; este launcher no está afiliado.
+
+## Documentation
+
+- Architecture internals: `docs/ARCHITECTURE.md`
+- CSS architecture and conventions: `docs/STYLES.md`
+
+---
+
+## Contributing
+
+When opening a PR:
+
+1. Keep IPC changes mirrored in `main.js` and `preload.js`.
+2. Add/update i18n keys in all locale files when UI text changes.
+3. Do not add new inline styles when a module CSS file is available.
+4. Update documentation when behavior changes (especially launch/patch/version flow).
+
+---
+
+## License
+
+ISC
+
+Hytale is a trademark of Hypixel Studios. This launcher is an independent community project and is not affiliated with Hypixel Studios.

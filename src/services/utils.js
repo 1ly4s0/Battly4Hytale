@@ -1,8 +1,16 @@
-const fs = require('fs-extra');
+﻿const fs = require('fs-extra');
 const axios = require('axios');
 const { BrowserWindow } = require('electron');
+const { isTrustedDomain } = require('../utils/integrity');
+const { logger } = require('../utils/logger');
 
-async function downloadFile(url, dest, event) {
+async function downloadFile(url, dest, event, expectedHash = null) {
+    if (!isTrustedDomain(url)) {
+        throw new Error(`Descarga bloqueada: dominio no confiable - ${url}`);
+    }
+
+    logger.info(`Descargando desde dominio confiable: ${url}`);
+
     const writer = fs.createWriteStream(dest);
 
     const response = await axios({
@@ -18,7 +26,7 @@ async function downloadFile(url, dest, event) {
 
     const totalLength = response.headers['content-length'];
 
-    console.log('Iniciando descarga...');
+    logger.info('Iniciando descarga...');
 
     let downloadedLength = 0;
     let lastTime = Date.now();
@@ -52,8 +60,29 @@ async function downloadFile(url, dest, event) {
 
     response.data.pipe(writer);
 
-    return new Promise((resolve, reject) => {
-        writer.on('finish', resolve);
+    return new Promise(async (resolve, reject) => {
+        writer.on('finish', async () => {
+            if (expectedHash) {
+                try {
+                    const { verifyFileIntegrity } = require('../utils/integrity');
+                    const verification = await verifyFileIntegrity(dest, expectedHash);
+
+                    if (!verification.valid) {
+                        logger.error(`VerificaciÃ³n de integridad fallÃ³ para: ${dest}`);
+                        await fs.remove(dest);
+                        reject(new Error('VerificaciÃ³n de integridad fallÃ³'));
+                        return;
+                    }
+                    logger.info(`Archivo verificado exitosamente: ${dest}`);
+                } catch (error) {
+                    logger.error('Error verificando integridad:', error);
+                    await fs.remove(dest);
+                    reject(error);
+                    return;
+                }
+            }
+            resolve();
+        });
         writer.on('error', reject);
     });
 }

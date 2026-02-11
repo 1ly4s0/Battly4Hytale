@@ -1,0 +1,1016 @@
+#modsView {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 14px var(--match-right-pad) 14px var(--match-left-pad);
+  overflow: hidden;
+}
+
+#modsView .mods-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+#modsView .mods-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#modsView .mods-header h2 {
+  margin: 0;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  color: rgba(242, 248, 255, 0.96);
+}
+
+#modsView .mods-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.36);
+}
+
+#modsView .tab-btn {
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: rgba(210, 227, 243, 0.8);
+  font-family: "Rajdhani", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#modsView .tab-btn:hover {
+  color: rgba(243, 249, 255, 0.95);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+#modsView .tab-btn.active {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+#modsView .mods-section {
+  min-height: 0;
+  flex: 1;
+}
+
+#modsView #discoverSection,
+#modsView #installedSection {
+  height: 100%;
+  min-height: 0;
+}
+
+#modsView .search-bar {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  margin: 0 0 12px;
+}
+
+#modsView .search-bar::before {
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(198, 221, 241, 0.54);
+}
+
+#modsView .search-bar input {
+  height: 44px;
+  padding: 0 14px 0 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(15, 17, 26, 0.56);
+  color: rgba(237, 246, 255, 0.95);
+  font-family: "Manrope", sans-serif;
+}
+
+#modsView .search-bar input::placeholder {
+  color: rgba(199, 220, 239, 0.5);
+}
+
+#modsView .search-bar input:focus {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+}
+
+#modsView #searchModsBtn {
+  min-width: 46px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(15, 17, 26, 0.56);
+  color: rgba(230, 243, 255, 0.9);
+}
+
+#modsView #searchModsBtn:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(15, 17, 26, 0.74);
+  transform: none;
+  box-shadow: none;
+}
+
+#modsView .mods-grid {
+  display: flex;
+  gap: 12px;
+  max-height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#modsView .mods-grid::-webkit-scrollbar,
+#modsView .installed-list::-webkit-scrollbar,
+#settingsModal .modal-content::-webkit-scrollbar,
+#modModal .modal-content::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+#modsView .mods-grid::-webkit-scrollbar-thumb,
+#modsView .installed-list::-webkit-scrollbar-thumb,
+#settingsModal .modal-content::-webkit-scrollbar-thumb,
+#modModal .modal-content::-webkit-scrollbar-thumb {
+  background: rgba(173, 206, 231, 0.34);
+  border-radius: 999px;
+}
+
+#modsView .mod-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 17, 26, 0.66),
+    rgba(9, 16, 28, 0.72)
+  );
+  backdrop-filter: blur(16px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.32);
+  padding: 12px;
+  width: calc(50% - 6px);
+}
+
+#modsView .mod-card::before {
+  display: none;
+}
+
+#modsView .mod-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.4);
+}
+
+#modsView .mod-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+#modsView .mod-card-title {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: rgba(241, 248, 255, 0.96);
+}
+
+#modsView .mod-card-author {
+  margin-top: 2px;
+  color: rgba(185, 211, 235, 0.65);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#modsView .mod-card-description {
+  margin-top: 2px;
+  color: rgba(213, 231, 247, 0.82);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  min-height: 0;
+  margin-bottom: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+#modsView .mod-card-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 2px;
+  border-top: 0;
+}
+
+#modsView .mod-card-footer .primary-btn {
+  width: auto;
+  min-width: 112px;
+  height: 32px;
+  border-radius: 9px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(9, 29, 49, 0.72);
+  color: rgba(236, 246, 255, 0.95);
+  box-shadow: none;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+#modsView .mod-card-footer .primary-btn:hover {
+  background: rgba(10, 36, 60, 0.92);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: none;
+}
+
+#modsView .installed-list {
+  display: grid;
+  gap: 10px;
+  max-height: 100%;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+#modsView .installed-mod-item {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 17, 26, 0.66),
+    rgba(9, 16, 28, 0.72)
+  );
+  min-height: 56px;
+  padding: 10px 12px;
+}
+
+#modsView .installed-mod-item:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: linear-gradient(
+    180deg,
+    rgba(15, 17, 26, 0.76),
+    rgba(9, 16, 28, 0.84)
+  );
+}
+
+#modsView .installed-mod-info .mod-name {
+  color: rgba(240, 248, 255, 0.95);
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.12rem;
+  letter-spacing: 0.02em;
+}
+
+#modsView .icon-button {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(231, 244, 255, 0.9);
+}
+
+#modsView .icon-button:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+#modsView .icon-button.delete-button:hover {
+  border-color: rgba(239, 68, 68, 0.42);
+  background: rgba(239, 68, 68, 0.18);
+}
+
+#modsView .loading-spinner {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  background: rgba(15, 17, 26, 0.58);
+  color: rgba(215, 231, 247, 0.86);
+  padding: 16px;
+  text-align: center;
+}
+
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+#settingsModal .modal-content.medium-modal {
+  width: min(900px, 92vw);
+  max-height: 86vh;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(
+    180deg,
+    rgba(14, 17, 26, 0.95),
+    rgba(9, 15, 26, 0.94)
+  );
+  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.46);
+  padding: 18px 18px 16px;
+}
+
+#settingsModal h2 {
+  margin: 0 0 12px;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+  color: rgba(242, 248, 255, 0.96);
+}
+
+#settingsModal .modal-close-btn,
+#modModal .modal-close-btn,
+#gameLogsModal .modal-close-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(236, 246, 255, 0.86);
+  top: 14px;
+  right: 14px;
+}
+
+#settingsModal .modal-close-btn:hover,
+#modModal .modal-close-btn:hover,
+#gameLogsModal .modal-close-btn:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#settingsModal .settings-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.34);
+  padding: 4px;
+  margin-bottom: 14px;
+}
+
+#settingsModal .settings-tab {
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: rgba(210, 227, 243, 0.8);
+  font-family: "Rajdhani", sans-serif;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#settingsModal .settings-tab:hover {
+  color: rgba(243, 249, 255, 0.95);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+#settingsModal .settings-tab.active {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+#settingsModal .settings-page {
+  max-height: calc(86vh - 170px);
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: none;
+}
+
+#settingsModal .settings-option {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 17, 26, 0.66),
+    rgba(9, 16, 28, 0.72)
+  );
+  padding: 12px;
+}
+
+#settingsModal .settings-option:hover {
+  border-color: rgba(255, 255, 255, 0.26);
+  background: linear-gradient(
+    180deg,
+    rgba(15, 17, 26, 0.76),
+    rgba(9, 16, 28, 0.84)
+  );
+}
+
+#settingsModal .setting-label {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  color: rgba(238, 247, 255, 0.95);
+}
+
+#settingsModal .settings-desc {
+  color: rgba(194, 215, 235, 0.7) !important;
+}
+
+#settingsModal .simple-input,
+#settingsModal .settings-select {
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(15, 17, 26, 0.56);
+  color: rgba(237, 246, 255, 0.95);
+}
+
+#settingsModal .simple-input:focus,
+#settingsModal .settings-select:focus {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+}
+
+#settingsModal .action-btn {
+  height: 36px;
+  border-radius: 10px;
+  font-family: "Rajdhani", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#settingsModal .primary-btn {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(7, 23, 41, 0.8) !important;
+  color: rgba(236, 246, 255, 0.95);
+  box-shadow: none;
+}
+
+#settingsModal .primary-btn:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(8, 29, 49, 0.92) !important;
+  transform: none;
+}
+
+#settingsModal .secondary-btn {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(15, 17, 26, 0.56);
+  color: rgba(234, 245, 255, 0.92);
+}
+
+#settingsModal .secondary-btn:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(15, 17, 26, 0.76);
+}
+
+#settingsModal .gpu-btn {
+  border-radius: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(15, 17, 26, 0.56);
+  color: rgba(214, 231, 246, 0.82);
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+#settingsModal .gpu-btn:hover {
+  border-color: rgba(255, 255, 255, 0.26);
+  color: rgba(239, 247, 255, 0.95);
+}
+
+#settingsModal .gpu-btn.active {
+  border-color: rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+#settingsModal .slider {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+#settingsModal .slider:before {
+  background: rgba(219, 237, 252, 0.84);
+}
+
+#settingsModal input:checked + .slider {
+  background: rgba(255, 255, 255, 0.26);
+  border-color: rgba(255, 255, 255, 0.36);
+}
+
+#settingsModal #customJavaArea {
+  border-radius: 12px !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  background: rgba(15, 17, 26, 0.52) !important;
+}
+
+#settingsModal small,
+#settingsModal #gpuDetectedText {
+  color: rgba(194, 215, 235, 0.72) !important;
+}
+
+#gameLogsModal .modal-content.game-logs-modal {
+  width: min(980px, 94vw);
+  max-height: 88vh;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(
+    180deg,
+    rgba(14, 17, 26, 0.95),
+    rgba(9, 15, 26, 0.94)
+  );
+  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.46);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#gameLogsModal h2 {
+  margin: 0;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.9rem;
+  letter-spacing: 0.05em;
+  color: rgba(242, 248, 255, 0.96);
+  padding-right: 40px;
+}
+
+#gameLogsModal .game-logs-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+#gameLogsModal .game-logs-mode-group {
+  display: grid;
+  gap: 6px;
+  flex: 1;
+}
+
+#gameLogsModal .game-logs-mode-group label {
+  color: rgba(194, 215, 235, 0.72);
+  font-family: "Rajdhani", sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#gameLogsModal #gameLogsMode {
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(15, 17, 26, 0.56);
+  color: rgba(237, 246, 255, 0.95);
+  min-width: 280px;
+}
+
+#gameLogsModal #refreshGameLogsBtn {
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(15, 17, 26, 0.56);
+  color: rgba(234, 245, 255, 0.92);
+  font-family: "Rajdhani", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#gameLogsModal #refreshGameLogsBtn:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(15, 17, 26, 0.76);
+}
+
+#gameLogsModal .game-logs-warning {
+  margin: 0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(239, 247, 255, 0.92);
+  padding: 8px 10px;
+  font-size: 0.84rem;
+}
+
+#gameLogsModal .game-logs-meta {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background: rgba(15, 17, 26, 0.42);
+  color: rgba(194, 215, 235, 0.78);
+  font-family: "Rajdhani", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  padding: 8px 10px;
+}
+
+#gameLogsModal .game-logs-output {
+  margin: 0;
+  flex: 1;
+  min-height: 300px;
+  max-height: calc(88vh - 240px);
+  overflow: auto;
+  white-space: pre-wrap;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  background: rgba(7, 12, 20, 0.88);
+  color: rgba(225, 239, 254, 0.93);
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  padding: 10px 12px;
+}
+
+#gameLogsModal .game-logs-output::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+#gameLogsModal .game-logs-output::-webkit-scrollbar-thumb {
+  background: rgba(173, 206, 231, 0.34);
+  border-radius: 999px;
+}
+
+#modModal .modal-content.mod-modal-content {
+  width: min(840px, 92vw);
+  max-height: 86vh;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(
+    180deg,
+    rgba(14, 17, 26, 0.95),
+    rgba(9, 15, 26, 0.94)
+  );
+  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.46);
+}
+
+#modModal .modal-body {
+  padding-right: 4px;
+}
+
+#modModal .modal-header-text h2 {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.03em;
+  color: rgba(242, 248, 255, 0.96);
+}
+
+#modModal .modal-mod-author {
+  color: rgba(194, 215, 235, 0.72);
+}
+
+#modModal .mod-pill,
+#modModal .stat-box {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(15, 17, 26, 0.58);
+  color: rgba(219, 237, 252, 0.86);
+}
+
+#modModal .modal-mod-meta .mod-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#modModal .modal-mod-meta .mod-pill i {
+  font-size: 0.72rem;
+  opacity: 0.88;
+}
+
+#modModal .modal-description-area h3 {
+  color: rgba(237, 246, 255, 0.95);
+}
+
+#modModal .modal-description-area p {
+  color: rgba(210, 228, 243, 0.82);
+}
+
+#modModal #modalInstallBtn {
+  width: 100%;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(7, 23, 41, 0.8);
+  color: rgba(236, 246, 255, 0.95);
+  font-family: "Rajdhani", sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: none;
+}
+
+#modModal #modalInstallBtn:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(8, 29, 49, 0.92);
+  transform: none;
+}
+
+#customDialog .modal-content.small-modal {
+  width: min(460px, 90vw);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(
+    180deg,
+    rgba(14, 17, 26, 0.96),
+    rgba(9, 15, 26, 0.95)
+  );
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.45);
+}
+
+#customDialog #dialogTitle {
+  margin-bottom: 8px;
+  font-family: "Rajdhani", sans-serif;
+  color: rgba(241, 248, 255, 0.96);
+}
+
+#customDialog #dialogMessage {
+  color: rgba(205, 224, 241, 0.82);
+}
+
+#customDialog .dialog-actions .action-btn {
+  height: 38px;
+  border-radius: 10px;
+  font-family: "Rajdhani", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#customDialog .dialog-actions .secondary-btn {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(15, 17, 26, 0.56);
+  color: rgba(234, 245, 255, 0.92);
+}
+
+#customDialog .dialog-actions .primary-btn {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(7, 23, 41, 0.8);
+  color: rgba(236, 246, 255, 0.95);
+  box-shadow: none;
+}
+
+#accountNameModal .modal-content.account-name-modal {
+  width: min(420px, 90vw);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(
+    180deg,
+    rgba(14, 17, 26, 0.96),
+    rgba(9, 15, 26, 0.95)
+  );
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.45);
+  display: grid;
+  gap: 12px;
+}
+
+#accountNameModal .account-name-modal h2 {
+  margin: 0;
+  font-family: "Rajdhani", sans-serif;
+  color: rgba(241, 248, 255, 0.96);
+}
+
+#accountNameModal .account-name-input {
+  width: 100%;
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(15, 17, 26, 0.56);
+  color: rgba(236, 246, 255, 0.95);
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1rem;
+  padding: 0 12px;
+  outline: none;
+}
+
+#accountNameModal .account-name-input::placeholder {
+  color: rgba(188, 213, 236, 0.5);
+}
+
+#accountNameModal .account-name-input:focus {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+}
+
+.onboarding-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(80, 122, 174, 0.2), transparent 45%),
+    linear-gradient(180deg, rgba(8, 12, 22, 0.9), rgba(8, 12, 22, 0.95));
+  backdrop-filter: blur(10px);
+}
+
+.onboarding-content {
+  width: min(760px, 92vw);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(
+    180deg,
+    rgba(14, 17, 26, 0.96),
+    rgba(9, 15, 26, 0.95)
+  );
+  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.46);
+  padding: 24px 24px 20px;
+}
+
+.onboarding-anim-wrapper {
+  width: 78px;
+  height: 78px;
+  margin: 0 auto 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(8, 29, 49, 0.86);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.38);
+}
+
+.onboarding-icon {
+  font-size: 1.8rem;
+  color: rgba(230, 243, 255, 0.94);
+}
+
+.onboarding-slide {
+  display: none;
+  text-align: center;
+}
+
+.onboarding-slide.active {
+  display: block;
+}
+
+.onboarding-slide h1,
+.onboarding-slide h2 {
+  margin: 0 0 8px;
+  font-family: "Rajdhani", sans-serif;
+  color: rgba(241, 248, 255, 0.96);
+}
+
+.onboarding-slide p {
+  margin: 0 0 14px;
+  color: rgba(205, 224, 241, 0.82);
+}
+
+.onboarding-step {
+  margin-bottom: 16px;
+}
+
+.onb-lang-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.onb-lang-card {
+  min-height: 78px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(15, 17, 26, 0.56);
+  color: rgba(234, 245, 255, 0.92);
+  display: grid;
+  place-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.onb-lang-card:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(15, 17, 26, 0.74);
+  transform: translateY(-1px);
+}
+
+.onb-lang-card.selected {
+  border-color: rgba(255, 255, 255, 0.32);
+  background: linear-gradient(
+    135deg,
+    rgba(140, 185, 220, 0.22),
+    rgba(95, 159, 205, 0.22)
+  );
+  box-shadow: 0 4px 12px rgba(95, 159, 205, 0.3);
+}
+
+.onb-lang-card .flag {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.onb-lang-card span:last-child {
+  font-size: 0.88rem;
+  line-height: 1.15;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.onboarding-input {
+  width: min(420px, 100%);
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(15, 17, 26, 0.56);
+  color: rgba(236, 246, 255, 0.95);
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1rem;
+  padding: 0 12px;
+  outline: none;
+}
+
+.onboarding-input:focus {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
+}
+
+.onboarding-input::placeholder {
+  color: rgba(188, 213, 236, 0.5);
+}
+
+.onboarding-btn {
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(7, 23, 41, 0.8);
+  color: rgba(236, 246, 255, 0.95);
+  font-family: "Rajdhani", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0 18px;
+}
+
+.onboarding-btn:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(8, 29, 49, 0.92);
+}
+
+.onboarding-btn.secondary {
+  background: rgba(15, 17, 26, 0.56);
+}
+
+.onboarding-btn:disabled {
+  opacity: 0.52;
+  cursor: not-allowed;
+}
+
+.step-nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.terms-label {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  text-align: left;
+  color: rgba(205, 224, 241, 0.82);
+  max-width: 520px;
+}
+
+.legal-link {
+  color: rgba(220, 238, 253, 0.95);
+  text-decoration: underline;
+}
+
+@media (max-width: 980px) {
+  #gameLogsModal .game-logs-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #gameLogsModal #gameLogsMode {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #gameLogsModal #refreshGameLogsBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+

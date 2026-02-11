@@ -1,4 +1,4 @@
-const axios = require('axios');
+﻿const axios = require('axios');
 const crypto = require('crypto');
 const { JSONStorage } = require('node-localstorage');
 const { app } = require('electron');
@@ -51,3 +51,4 @@ function updateUserProperties(props) {
 }
 
 module.exports = { _trackEvent, trackScreen, updateUserProperties };
+

@@ -1,0 +1,14 @@
+﻿.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+.delay-1 {
+  animation-delay: 0.1s;
+}
+.delay-2 {
+  animation-delay: 0.2s;
+}
+.delay-3 {
+  animation-delay: 0.3s;
+}
+
+

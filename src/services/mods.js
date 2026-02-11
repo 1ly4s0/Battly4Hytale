@@ -1,9 +1,10 @@
-const path = require('path');
+﻿const path = require('path');
 const fs = require('fs-extra');
 const axios = require('axios');
 const { app, BrowserWindow } = require('electron');
 const { downloadFile } = require('./utils');
 const { _trackEvent } = require('../analytics');
+const { logger } = require('../utils/logger');
 
 const CF_API_KEY = '$2a$10$S7nVFhQKpxteK4Fwf9yoxejmI.NjJiE53Qh4IeaDbIu/./oTM/MKa';
 const CF_API_URL = 'https://api.curseforge.com/v1';
@@ -64,7 +65,7 @@ function registerModHandlers(ipcMain) {
             return { success: true, data: hytaleMods };
 
         } catch (error) {
-            console.error("CF API Error:", error?.response?.data || error.message);
+            logger.error("CF API Error:", error?.response?.data || error.message);
             return { success: false, error: "Error connecting to CurseForge: " + error.message };
         }
     });
@@ -75,7 +76,7 @@ function registerModHandlers(ipcMain) {
             const response = await axios.get(`${CF_API_URL}/mods/${modId}/description`, { headers });
             return { success: true, data: response.data.data };
         } catch (error) {
-            console.error("CF Description Error:", error);
+            logger.error("CF Description Error:", error);
             return { success: false, error: error.message };
         }
     });
@@ -103,7 +104,7 @@ function registerModHandlers(ipcMain) {
     ipcMain.handle('install-mod', async (event, modData) => {
         try {
             await fs.ensureDir(modsDir);
-            event.sender.send('launch-status', `Buscando última versión de ${modData.name}...`);
+            event.sender.send('launch-status', `Buscando Ãºltima versiÃ³n de ${modData.name}...`);
 
             const headers = { 'x-api-key': CF_API_KEY, 'Accept': 'application/json' };
             const filesResponse = await axios.get(`${CF_API_URL}/mods/${modData.id}/files`, {
@@ -136,7 +137,7 @@ function registerModHandlers(ipcMain) {
 
             return { success: true };
         } catch (error) {
-            console.error(error);
+            logger.error(error);
             return { success: false, error: error.message };
         }
     });

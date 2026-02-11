@@ -1,0 +1,28 @@
+﻿.window-controls {
+  display: flex;
+  gap: 2px;
+  -webkit-app-region: no-drag;
+}
+.control-btn {
+  width: 46px;
+  height: var(--titlebar-height);
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all var(--transition-fast);
+}
+.control-btn:hover {
+  background: var(--glass-bg-hover);
+  color: var(--text-primary);
+}
+.control-btn.close:hover {
+  background: var(--error);
+  color: white;
+}
+
+

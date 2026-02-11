@@ -1,9 +1,10 @@
-const fs = require('fs-extra');
+﻿const fs = require('fs-extra');
 const path = require('path');
 const AdmZip = require('adm-zip');
+const { logger } = require('../utils/logger');
 
 const ORIGINAL_DOMAIN = 'hytale.com';
-const TARGET_DOMAIN = 'sanasol.ws';
+const TARGET_DOMAIN = 'battly.org';
 
 class ServerPatcher {
     constructor() {
@@ -46,42 +47,42 @@ class ServerPatcher {
         const serverDir = path.dirname(serverPath);
         const flagFile = path.join(serverDir, this.patchedFlag);
 
-        console.log("=== Server Patcher (Fast) ===");
-        console.log(`Target: ${serverPath}`);
+        logger.info("=== Server Patcher (Fast) ===");
+        logger.info(`Target: ${serverPath}`);
 
         if (await fs.pathExists(flagFile)) {
             try {
                 const flagData = await fs.readJson(flagFile);
                 if (flagData.targetDomain === TARGET_DOMAIN && await fs.pathExists(serverPath)) {
-                    console.log("Server already patched.");
+                    logger.info("Server already patched.");
                     return;
                 }
             } catch (e) { }
-            console.warn("Repatching needed (invalid flag or missing server).");
+            logger.warn("Repatching needed (invalid flag or missing server).");
         }
 
-        if (event) event.reply('launch-status', 'Parcheando servidor (Rápido)...');
+        if (event) event.reply('launch-status', 'Parcheando servidor (RÃ¡pido)...');
 
         const backupPath = serverPath + '.bak';
         if (await fs.pathExists(backupPath)) {
-            console.log("Restoring from backup to ensure clean state...");
+            logger.info("Restoring from backup to ensure clean state...");
             await fs.copy(backupPath, serverPath);
         } else {
-            console.log("Creating backup...");
+            logger.info("Creating backup...");
             await fs.copy(serverPath, backupPath);
         }
 
-        console.log("Loading JAR into memory...");
+        logger.info("Loading JAR into memory...");
         let zip;
         try {
             zip = new AdmZip(serverPath);
         } catch (e) {
-            console.error("Failed to load JAR:", e);
+            logger.error("Failed to load JAR:", e);
             throw e;
         }
 
         const entries = zip.getEntries();
-        console.log(`JAR contains ${entries.length} entries.`);
+        logger.info(`JAR contains ${entries.length} entries.`);
 
         let totalCount = 0;
         const oldUtf8 = this.stringToUtf8(ORIGINAL_DOMAIN);
@@ -96,7 +97,7 @@ class ServerPatcher {
                 try {
                     data = entry.getData();
                 } catch (e) {
-                    console.warn(`Skipping unreadable entry: ${name} (${e.message})`);
+                    logger.warn(`Skipping unreadable entry: ${name} (${e.message})`);
                     continue;
                 }
 
@@ -110,10 +111,10 @@ class ServerPatcher {
             }
         }
 
-        console.log(`Total replaced: ${totalCount}`);
+        logger.info(`Total replaced: ${totalCount}`);
 
         if (totalCount > 0) {
-            console.log("Writing patched JAR...");
+            logger.info("Writing patched JAR...");
             zip.writeZip(serverPath);
 
             await fs.writeJson(flagFile, {
@@ -121,9 +122,9 @@ class ServerPatcher {
                 targetDomain: TARGET_DOMAIN,
                 patcherVersion: '2.0.0'
             });
-            console.log("Patching complete.");
+            logger.info("Patching complete.");
         } else {
-            console.log("No occurrences found.");
+            logger.info("No occurrences found.");
             await fs.writeJson(flagFile, {
                 patchedAt: new Date().toISOString(),
                 targetDomain: TARGET_DOMAIN,

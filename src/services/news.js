@@ -1,4 +1,5 @@
-const axios = require('axios');
+﻿const axios = require('axios');
+const { logger } = require('../utils/logger');
 
 async function fetchHytaleNews() {
     try {
@@ -23,7 +24,7 @@ async function fetchHytaleNews() {
         }));
 
     } catch (error) {
-        console.error("Error fetching news:", error.message);
+        logger.error("Error fetching news:", error.message);
         return [];
     }
 }

@@ -1,157 +1,42 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Battly Splash</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: rgba(0, 0, 0, 0);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            overflow: hidden;
-            user-select: none;
-        }
-
-        .container {
-            width: 320px;
-            height: 360px;
-            background: linear-gradient(135deg, #181825 0%, #1e1e2e 100%);
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .logo {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.3));
-            animation: float 3s ease-in-out infinite;
-        }
-
-        h1 {
-            color: #fff;
-            font-size: 24px;
-            font-weight: 700;
-            margin: 0;
-            letter-spacing: 1px;
-            background: linear-gradient(to right, #fff, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .subtitle {
-            color: #7f849c;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-top: 4px;
-            margin-bottom: 35px;
-            font-weight: 600;
-        }
-
-        .loader-track {
-            width: 180px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 2px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .loader-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 40%;
-            background: linear-gradient(90deg, #a855f7, #d8b4fe);
-            border-radius: 2px;
-            animation: slide 1.2s infinite ease-in-out;
-            box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
-        }
-
-        .status {
-            margin-top: 15px;
-            color: #6c7086;
-            font-size: 12px;
-            height: 15px;
-            transition: opacity 0.3s ease;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-8px);
-            }
-        }
-
-        @keyframes slide {
-            0% {
-                left: -40%;
-            }
-
-            50% {
-                left: 40%;
-                width: 60%;
-            }
-
-            100% {
-                left: 100%;
-                width: 40%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles/splash.css">
 </head>
 
 <body>
-    <div class="container">
-        <img src="assets/images/logo.png" alt="Battly" class="logo">
-        <h1>BATTLY</h1>
-        <div class="subtitle">LAUNCHER</div>
-
-        <div class="loader-track">
-            <div class="loader-bar"></div>
+    <main class="splash-window">
+        <div class="splash-background" aria-hidden="true">
+            <img class="splash-bg-image" src="assets/images/background1.webp" alt="">
+            <div class="splash-bg-vignette"></div>
+            <div class="splash-bg-frost"></div>
+            <div class="splash-bg-noise"></div>
         </div>
-        <div class="status" id="status-text">Loading...</div>
-    </div>
 
-    <script>
-        const texts = [
-            "Loading resources...",
-            "Initializing engine...",
-            "Checking updates...",
-            "Preparing magic..."
-        ];
-        let index = 0;
-        const el = document.getElementById('status-text');
+        <header class="splash-header">
+            <span class="splash-kicker">BATTLY LAUNCHER 4 HYTALE</span>
+        </header>
 
-        setInterval(() => {
-            el.style.opacity = '0';
-            setTimeout(() => {
-                index = (index + 1) % texts.length;
-                el.innerText = texts[index];
-                el.style.opacity = '1';
-            }, 300);
-        }, 800);
-    </script>
+        <section class="splash-content">
+            <img src="assets/images/logo.png" alt="Battly" class="splash-logo">
+            <h1 class="splash-title">BATTLY</h1>
+            <p class="splash-subtitle">Launcher 4 Hytale</p>
+        </section>
+
+        <footer class="splash-footer">
+            <div class="splash-loader-track" aria-hidden="true">
+                <div class="splash-loader-bar"></div>
+            </div>
+            <p class="splash-status" id="status-text">Loading resources...</p>
+        </footer>
+    </main>
+
+    <script src="scripts/splash.js"></script>
 </body>
 
 </html>
+
